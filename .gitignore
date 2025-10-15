@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Data files (IMPORTANT for Reddit data privacy)
+*.csv
+*.json
+data/
+raw_data/
+reddit_data/
+
+# API credentials
+.env
+config.ini
+credentials.json
+praw.ini
+
+# Model files (can be large)
+*.pkl
+*.h5
+models/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
