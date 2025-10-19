@@ -2,26 +2,19 @@ import convokit
 import pandas as pd
 import os
 
-# Get the directory where the script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Go up one level to the project root
 project_root = os.path.dirname(script_dir)
-
-# Define path to data folder within project
 data_folder = os.path.join(project_root, "data")
 print(f"Data folder path: {data_folder}")
-
-# Ensure the data folder exists
 os.makedirs(data_folder, exist_ok=True)
 print(f"Data directory exists: {os.path.exists(data_folder)}")
 
-# Load corpus
+# load corpus
 print("Downloading corpus...")
 corpus = convokit.Corpus(filename=convokit.download("subreddit-Guyana"))
 print("Corpus downloaded and loaded successfully")
 
-# Turn corpus to DataFrame
+# turn corpus to df
 print("Converting to DataFrame...")
 df = corpus.get_utterances_dataframe()
 print(f"DataFrame created with {len(df)} rows")
