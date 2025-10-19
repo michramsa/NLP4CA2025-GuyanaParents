@@ -10,11 +10,51 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from imports import *
 ########################################################
 
-# data has text called [deleted], which are unneeded 
-def remove_deleted(csv):
+# data has text which are empty or otherwise unneeded, fix whitespace
+def remove_deleted_fix_whitespace(csv):
     df = pd.read_csv(csv)
     print(df.head())
 
+    # remove NaNs + "[deleted]" + "[removed]"
+    df_cleaned = df[(df['text'].notna()) & (df['text'] != '[deleted]') & (df['text'] != '[removed]') ]
+    # check for completely empty rows
+    df_cleaned = df_cleaned[df_cleaned['text'].str.strip() != '']
+    print(df_cleaned.head())
+
+    df_cleaned['text'] = df_cleaned['text'].str.replace(r'\s+', ' ', regex=True).str.strip()
+
+    return df_cleaned
+
+# emojis look like empty cells in Excel - need to be removed
+def remove_emoji_only_responses(df):
+    """
+    Remove responses that are likely just emojis or very short
+    """
+    # Remove based on character length (emojis are typically 1-4 characters)
+    df_cleaned = df[df['text'].str.len() > 4]
+    
+    return df_cleaned
+
+# duplicate comments
+def remove_duplicates(df):
+    df_cleaned = df.drop_duplicates(subset=['text'], keep='first')
+
+    return df_cleaned
+
+# filters length AND save
+def filter_length_and_save(df, min_words):
+    df['word_count'] = df['text'].str.split().str.len()
+    
+    min_words = 5  
+    df_cleaned = df[df['word_count'] >= min_words]
+    df_cleaned.to_csv('data/guyana_utterances_cleaned.csv', index=False)
+
 if __name__=="__main__":
     # test function
-    remove_deleted(raw_data_file)
+    df_cleaned = remove_deleted_fix_whitespace(raw_data_file)
+    df_cleaned = remove_emoji_only_responses(df_cleaned)
+    df_cleaned = remove_duplicates(df_cleaned)
+
+    # remove text of certain length
+    min_words = 10
+    filter_length_and_save(df_cleaned, min_words)
