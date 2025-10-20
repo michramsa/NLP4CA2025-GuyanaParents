@@ -23,7 +23,7 @@ if __name__ == "__main__":
     # topics, probs = topic_model.fit_transform(df_cleaned['text'].tolist())
     # topic_model.save("models/bertopic_guyana_conversations_min10")
 
-    # ### IF YOU DON'T ALREADY HAVE THE MODEL (WITH STOPWORDS)- use this
+    ### IF YOU DON'T ALREADY HAVE THE MODEL (WITH STOPWORDS)- use this
     # ### for model saving
     # os.makedirs("models", exist_ok=True)
     # ### load data
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     topics = topic_model.topics_
     df_with_topics = df_cleaned.copy()
     df_with_topics['topic'] = topics
-    specific_topic = 11
+    specific_topic = 12
     topic_posts = df_with_topics[df_with_topics['topic'] == specific_topic]['text']
 
     print(f"Posts in Topic {specific_topic}:")

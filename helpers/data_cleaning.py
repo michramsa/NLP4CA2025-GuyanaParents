@@ -42,19 +42,25 @@ def remove_duplicates(df):
     return df_cleaned
 
 # filters length AND save
-def filter_length_and_save(df, min_words):
+def filter_length_and_save(df, min_words, save_name):
     df['word_count'] = df['text'].str.split().str.len()
     
     min_words = 5  
     df_cleaned = df[df['word_count'] >= min_words]
-    df_cleaned.to_csv('data/guyana_utterances_cleaned.csv', index=False)
+    df_cleaned.to_csv('data/'+save_name, index=False)
 
-if __name__=="__main__":
-    # test function
-    df_cleaned = remove_deleted_fix_whitespace(raw_data_file)
+# encompasses all helper functions
+# outputs - cleaned data file into the data folder
+# see "imports.py" for variable definitions
+def all_cleaning(file_name, min_words, save_name):
+    df_cleaned = remove_deleted_fix_whitespace(file_name)
     df_cleaned = remove_emoji_only_responses(df_cleaned)
     df_cleaned = remove_duplicates(df_cleaned)
 
     # remove text of certain length
-    min_words = 10
-    filter_length_and_save(df_cleaned, min_words)
+    filter_length_and_save(df_cleaned, min_words, save_name)
+
+if __name__=="__main__":
+    ## Change this save file name everytime you change the file!!
+    save_file_name = "curated_raw_data_cleaned.csv"
+    all_cleaning(raw_curated_file, 10, save_file_name)
