@@ -45,7 +45,6 @@ def remove_duplicates(df):
 def filter_length_and_save(df, min_words, save_name):
     df['word_count'] = df['text'].str.split().str.len()
     
-    min_words = 5  
     df_cleaned = df[df['word_count'] >= min_words]
     df_cleaned.to_csv('data/'+save_name, index=False)
 
