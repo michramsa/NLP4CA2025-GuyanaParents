@@ -1,5 +1,6 @@
 import convokit
 import pandas as pd
+import numpy as np
 import os
 import re
 import json
@@ -22,3 +23,4 @@ artic_shift_comments = PROJECT_ROOT / "data"/ "r_Guyana_comments.jsonl"
 artic_shift_posts = PROJECT_ROOT / "data"/ "r_Guyana_posts.jsonl"
 filtered_artic_shift_comments_1 = PROJECT_ROOT / "data" / "articshift_filtered_comments.csv"
 filtered_artic_shift_comments_2 = PROJECT_ROOT / "data" / "articshift_filtered_comments_v2.csv"
+final_cleaned_no_quotes_no_url = PROJECT_ROOT / "data" / "simple_ashift_filtered_v2_no_quotes_URL.csv"
