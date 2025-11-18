@@ -4,6 +4,7 @@ import os
 import re
 import json
 import csv
+from html import unescape
 from pathlib import Path
 from bertopic import BERTopic
 from sklearn.feature_extraction.text import CountVectorizer
