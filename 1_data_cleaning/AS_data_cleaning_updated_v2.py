@@ -358,10 +358,44 @@ def clean_reddit_data_pipeline(input_jsonl_path, output_csv_path):
     
     return df
 
+def filter_csv_by_word_count(csv_filename, min_word_count, output_filename=None):
+    # default output filename if not provided
+    if output_filename is None:
+        base_name = csv_filename.rsplit('.', 1)[0]
+        output_filename = f"{base_name}_filtered.csv"
+    
+    filtered_rows = []
+    
+    with open(csv_filename, 'r', encoding='utf-8') as infile:
+        reader = csv.DictReader(infile)
+        
+        fieldnames = reader.fieldnames
+        
+        for row in reader:
+            try:
+                word_count = int(row['word_count'])
+                if word_count >= min_word_count:
+                    filtered_rows.append(row)
+            except (ValueError, KeyError) as e:
+                # skip rows with invalid or missing word_count
+                print(f"Warning: Skipping row {row.get('id', 'unknown')} - {e}")
+                continue
+    
+    with open(output_filename, 'w', newline='', encoding='utf-8') as outfile:
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(filtered_rows)
+    
+    print(f"Filtered {len(filtered_rows)} entries from {csv_filename}")
+    print(f"Output saved to {output_filename}")
+    
+    return output_filename
+
 if __name__ == "__main__":
-    # Define paths
     input_jsonl = raw_data_file
     output_cleaned = '0_data/2026_Guyana_comments_CLEANED_FINAL.csv'
     
-    # Run the complete pipeline
-    cleaned_df = clean_reddit_data_pipeline(input_jsonl, output_cleaned)
+    # cleaned_df = clean_reddit_data_pipeline(input_jsonl, output_cleaned)
+
+    # WC for word count filtered
+    filter_csv_by_word_count(output_cleaned, min_word_count=100, output_filename="0_data/2026_Guyana_comments_CLEANED_FINAL_WC.csv")

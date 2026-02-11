@@ -5,15 +5,18 @@ PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 from imports import *
 ########################################################
-import argparse
 from datetime import datetime
 import json
+
+# File Purpose: Takes a cleaned CSV file from AS_data_cleaning_updated_v2.py and then filters it for comments based on keywords.
+# Filtering is done via bootstrapping, i.e. iterative process.
 
 
 PATTERNS = [
     r"\b(government|parliament|minister|prime|president|PPP|PPP/C|ministries|politics|APNU|PNC|election)\b",
-    r"\b(economy|infrastructure|corruption|corrupt|budget|healthcare|education|economic|voting)\b",
-    r"\b(policy|irfaan|ali|law|bill|gov't)\b"
+    r"\b(economy|infrastructure|corruption|corrupt|budget|healthcare|education|economic|voting|money|wage|wages)\b",
+    r"\b(irfaan|ali|david|granger|bharrat|jagdeo|donald|ramotar|janet|jagan|sam|hinds|desmond|hoyte|burnham|cheddi|arthur|chung)\b",
+    r"\b(policy|gov't|govt|progress|foreign|foreigners)\b"
 ]
 
 def compile_patterns(patterns):
@@ -141,5 +144,8 @@ def bootstrap_filter(input_csv, output_dir, iteration=1, patterns=None):
 if __name__ == "__main__":
 
     # change as needed
-    iteration_num = 1
-    bootstrap_filter(cleaned_2026_Guyana_comments, "./bootstrap_output", iteration_num, None)
+    # iteration_num = 1
+    # bootstrap_filter(cleaned_2026_Guyana_comments, "./bootstrap_output", iteration_num, None)
+
+    iteration_num = 2
+    bootstrap_filter(cleaned_2026_Guyana_comments_WC, "./bootstrap_output", iteration_num, None)

@@ -41,3 +41,6 @@ Thumbs.db
 config.py
 NLP4CA_dumps/
 0_data
+bootstrap_output/
+2_data_exploration/figures
+1_data_cleaning/patterns.txt
