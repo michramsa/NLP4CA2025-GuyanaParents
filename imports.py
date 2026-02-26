@@ -8,6 +8,9 @@ import csv
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import argparse
+import matplotlib.ticker as mticker
+
 from html import unescape
 from pathlib import Path
 from bertopic import BERTopic
@@ -32,4 +35,7 @@ PROJECT_ROOT = Path(__file__).parent
 
 raw_data_file = PROJECT_ROOT / "0_data" / "2026_Guyana_comments.jsonl"
 cleaned_2026_Guyana_comments = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL.csv"
-cleaned_2026_Guyana_comments_WC = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WC.csv"
+cleaned_2026_Guyana_comments_WC_100 = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WC_100.csv"
+cleaned_2026_Guyana_comments_WC_50 = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WC_50.csv"
+cleaned_2026_Guyana_comments_WCDA_50 = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WCDA_50.csv"
+cleaned_2026_Guyana_comments_WCDA_100 = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WCDA_100.csv"

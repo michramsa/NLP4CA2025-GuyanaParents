@@ -338,10 +338,17 @@ def clean_reddit_data_pipeline(input_jsonl_path, output_csv_path):
     # Step 10: Filter out quotes (optional - based on your needs)
     print("Step 10: Filtering quotes...")
     df = df[~df['body'].apply(contains_quote)]  # Keep only non-quotes
+
+    # Step 11a: Convert UTC timestamp to readable date
+    print("Step 11a: Converting timestamps...")
+    df['date'] = pd.to_datetime(df['created_utc'], unit='s', utc=True)
+    df['year'] = df['date'].dt.year
+    df['month'] = df['date'].dt.month
+    df['year_month'] = df['date'].dt.to_period('M').astype(str)  # e.g. "2011-10"
     
-    # Step 11: Reduce columns (keep only needed columns)
-    print("Step 11: Selecting final columns...")
-    final_columns = ['author', 'body', 'id']  # Adjust as needed
+    # Step 11b: Reduce columns (keep only needed columns)
+    print("Step 11b: Selecting final columns...")
+    final_columns = ['author', 'body', 'id', 'created_utc', 'date', 'year', 'month', 'year_month']
     df = df[final_columns]
     
     # Step 12: Analyze and save
@@ -392,10 +399,32 @@ def filter_csv_by_word_count(csv_filename, min_word_count, output_filename=None)
     return output_filename
 
 if __name__ == "__main__":
+    ## Most recent as of 2/25/2026
+    ## ~~~ Added in looking at timestamps ~~~
+    ## clean_reddit_data_pipeline does the preprocessing on the raw data file from Articshift (JSONL)
+    ## so here, i re-run it because i added in the date information
+    ## for me - raw_data_file = PROJECT_ROOT / "0_data" / "2026_Guyana_comments.jsonl"
     input_jsonl = raw_data_file
-    output_cleaned = '0_data/2026_Guyana_comments_CLEANED_FINAL.csv'
-    
-    # cleaned_df = clean_reddit_data_pipeline(input_jsonl, output_cleaned)
+    output_cleaned = '0_data/2026_Guyana_comments_CLEANED_FINAL_WCDA.csv' 
+    cleaned_df = clean_reddit_data_pipeline(input_jsonl, output_cleaned)
 
-    # WC for word count filtered
-    filter_csv_by_word_count(output_cleaned, min_word_count=100, output_filename="0_data/2026_Guyana_comments_CLEANED_FINAL_WC.csv")
+    ## now we can manipulate that file (output_cleaned) to filter out comments by min word count
+    # WCDA for word count filtered and date
+    filter_csv_by_word_count(output_cleaned, min_word_count=100, output_filename="0_data/2026_Guyana_comments_CLEANED_FINAL_WCDA_100.csv")
+    # WCDA for word count filtered - 50 words
+    filter_csv_by_word_count(output_cleaned, min_word_count=50, output_filename="0_data/2026_Guyana_comments_CLEANED_FINAL_WCDA_50.csv")
+
+    ###########################################################################################################################################
+    ## Old code - keep for reference
+    ## ~~~ Before looking at timestamps ~~~
+    ## clean_reddit_data_pipeline does the preprocessing on the raw data file from Articshift (JSONL)
+    ## for me - raw_data_file = PROJECT_ROOT / "0_data" / "2026_Guyana_comments.jsonl"
+    # input_jsonl = raw_data_file
+    # output_cleaned = '0_data/2026_Guyana_comments_CLEANED_FINAL.csv'
+    # cleaned_df = clean_reddit_data_pipeline(input_jsonl, output_cleaned)
+    ## now we can manipulate that file to filter out comments by min word count
+    # # WC for word count filtered
+    # filter_csv_by_word_count(output_cleaned, min_word_count=100, output_filename="0_data/2026_Guyana_comments_CLEANED_FINAL_WC_100.csv")
+    # WC for word count filtered - 50 words
+    # filter_csv_by_word_count(output_cleaned, min_word_count=50, output_filename="0_data/2026_Guyana_comments_CLEANED_FINAL_WC_50.csv")
+    ##########################################################################################################################################

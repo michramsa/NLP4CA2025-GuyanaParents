@@ -13,11 +13,18 @@ import json
 
 
 PATTERNS = [
-    r"\b(government|parliament|minister|prime|president|PPP|PPP/C|ministries|politics|APNU|PNC|election)\b",
-    r"\b(economy|infrastructure|corruption|corrupt|budget|healthcare|education|economic|voting|money|wage|wages)\b",
+    r"\b(government|parliament|minister|prime|president|PPP|PPP/C|ministries|politics|political|politically|APNU|PNC|election)\b",
+    r"\b(economy|infrastructure|corruption|corrupt|crime|budget|healthcare|education|economic|voting|money|wage|wages|currency|tax|investment)\b",
+    r"\b(income|employment|resources|export|stable|stability|nation|oil|companies|company|legal|legalized|business|businesses)\b",
+    r"\b(essequibo)\b",
     r"\b(irfaan|ali|david|granger|bharrat|jagdeo|donald|ramotar|janet|jagan|sam|hinds|desmond|hoyte|burnham|cheddi|arthur|chung)\b",
-    r"\b(policy|gov't|govt|progress|foreign|foreigners)\b"
-]
+    r"\b(policy|gov't|govt|progress|foreign|foreigners|region|regional|tourism|tourist|tourists|future)\b",
+    r"\b(crime\s+rate)\b",
+    r"\b(3rd\s+world\s+country)\b",
+    r"\b(tax\s+payers)\b", 
+    r"\b(tax\s+payer)\b",
+    r"\b(big\s+oil)\b"
+  ]
 
 def compile_patterns(patterns):
     """Compile regex patterns with case-insensitive flag"""
@@ -147,5 +154,12 @@ if __name__ == "__main__":
     # iteration_num = 1
     # bootstrap_filter(cleaned_2026_Guyana_comments, "./bootstrap_output", iteration_num, None)
 
-    iteration_num = 2
-    bootstrap_filter(cleaned_2026_Guyana_comments_WC, "./bootstrap_output", iteration_num, None)
+    # iteration_num = 2
+    # bootstrap_filter(cleaned_2026_Guyana_comments_WC_100, "./bootstrap_output", iteration_num, None)
+
+    # iteration_num = 3
+    # bootstrap_filter(cleaned_2026_Guyana_comments_WC_100, "./bootstrap_output", iteration_num, None)
+
+    # did not run iteration 4 yet!! - 2/26/2027
+    iteration_num = 4
+    bootstrap_filter(cleaned_2026_Guyana_comments_WC_50, "./bootstrap_output", iteration_num, None)

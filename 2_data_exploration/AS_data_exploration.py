@@ -21,9 +21,9 @@ def word_char_count_figs(filename, output_dir=None):
     plt.ylabel('Frequency', fontsize=12)
     plt.title('Distribution of Word Count', fontsize=14, fontweight='bold')
     plt.grid(axis='y', alpha=0.3)
-    plt.savefig(output_dir / 'word_count_distribution.png', dpi=300, bbox_inches='tight')
+    plt.savefig(output_dir / 'word_count_distribution_iter3_non_matched.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"Word count distribution saved to {output_dir / 'word_count_distribution_iter1_non_matched.png'}")
+    print(f"Word count distribution saved to {output_dir / 'word_count_distribution_all.png'}")
     
     # fig 2: char count
     plt.figure(figsize=(10, 6))
@@ -32,14 +32,14 @@ def word_char_count_figs(filename, output_dir=None):
     plt.ylabel('Frequency', fontsize=12)
     plt.title('Distribution of Character Count', fontsize=14, fontweight='bold')
     plt.grid(axis='y', alpha=0.3)
-    plt.savefig(output_dir / 'char_count_distribution.png', dpi=300, bbox_inches='tight')
+    plt.savefig(output_dir / 'char_count_distribution_iter3_non_matched.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"Character count distribution saved to {output_dir / 'char_count_distribution_iter1_non_matched.png'}")
+    print(f"Character count distribution saved to {output_dir / 'char_count_distribution_iter3_non_matched.png'}")
 
 if __name__ == "__main__":
     # create figs for word count and char count
     # must be a CSV with the following columns: word_count, char_count
 
-    filename = "/home/epi2melabs/NLP4CA2025-GuyanaParents/bootstrap_output/iter1_non_matched.csv"
+    filename = "/home/epi2melabs/NLP4CA2025-GuyanaParents/bootstrap_output/iter3_non_matched.csv"
     output = "/home/epi2melabs/NLP4CA2025-GuyanaParents/2_data_exploration/figures"
     word_char_count_figs(filename, output)
