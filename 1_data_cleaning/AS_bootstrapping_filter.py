@@ -161,5 +161,6 @@ if __name__ == "__main__":
     # bootstrap_filter(cleaned_2026_Guyana_comments_WC_100, "./bootstrap_output", iteration_num, None)
 
     # did not run iteration 4 yet!! - 2/26/2027
+    # ran iter 4 with the same patterns on the combined file (combined is both the 50 and 100 word count files combined with no multiples of comments)
     iteration_num = 4
-    bootstrap_filter(cleaned_2026_Guyana_comments_WC_50, "./bootstrap_output", iteration_num, None)
+    bootstrap_filter(combined_comments, "./bootstrap_output", iteration_num, None)

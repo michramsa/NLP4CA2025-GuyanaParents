@@ -39,3 +39,7 @@ cleaned_2026_Guyana_comments_WC_100 = PROJECT_ROOT / "0_data" / "2026_Guyana_com
 cleaned_2026_Guyana_comments_WC_50 = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WC_50.csv"
 cleaned_2026_Guyana_comments_WCDA_50 = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WCDA_50.csv"
 cleaned_2026_Guyana_comments_WCDA_100 = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_FINAL_WCDA_100.csv"
+combined_comments = PROJECT_ROOT / "0_data" / "2026_Guyana_comments_CLEANED_WCDA_combined.csv"
+quartile_comments = PROJECT_ROOT / "0_data" / "iter4_quartile_comments.csv"
+TL_quartile_comments = PROJECT_ROOT / "0_data" / "unfiltered_TL_iter4_quartile_comments.csv"
+mich_annotations = PROJECT_ROOT / "0_data" / "M_annotated_iter4_quartile_comments.csv"
